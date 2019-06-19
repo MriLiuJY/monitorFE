@@ -8,9 +8,9 @@
     "lint": "eslint --fix",
     "start": "node server/index",
     "dev": "node server/index",
-    "build": "webpack --config config/webpack.pro.config.js",
-    "dist-js": "webpack --config config/webpack.pro.config.js",
-    "dev-js": "webpack --config config/webpack.pro.config.js --env.pro=dev",
+    "build": "webpack --config config/webpack.pro.config.js  && conventional-changelog -p angular -i ./dist/CHANGELOG.md -s",
+    "dist-js": "webpack --config config/webpack.pro.config.js && conventional-changelog -p angular -i ./dist/CHANGELOG.md -s",
+    "dev-js": "webpack --config config/webpack.pro.config.js --env.pro=dev  && conventional-changelog -p angular -i ./dist/CHANGELOG.md -s",
     "server": "node server/server"
   },
   "repository": {
@@ -47,5 +47,10 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

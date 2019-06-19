@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Monitor testPage</title>
+  <title>Monitor 打包测试</title>
   <style>
   button{
     width: auto;
@@ -18,7 +18,7 @@
   </style>
 </head>
 <body>
-  <h1>Monitor testPage</h1>
+  <h1>Monitor 打包测试</h1>
 
   <!-- ajax请求错误 -->
   <p>ajax请求错误</p>
@@ -50,13 +50,18 @@
   <button>第三方资源错误</button>
   <hr>
 
-  <script src="../dist/js/monitor.js"></script>
+  <script src="../version.js"></script>
   <script>
     var config = {
       name: 'test',
     };
-
-    initMonitor(config);
+    
+    var script = document.createElement("script");
+    script.src = `./js/monitor.${metadata.version}.js`;
+    document.body.appendChild(script);
+    script.addEventListener('load', (e) => {
+      initMonitor(config);
+    });
   </script>
 </body>
 </html>
