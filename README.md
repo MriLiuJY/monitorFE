@@ -2,6 +2,26 @@
 
 前端埋点监控SDK。
 
+## webpack命令说明
+
+注意：编译前需要安装NodeJS（注意对node10兼容并不是特别友好），并在根目录下运行`npm install`安装所需的模块。
+
+1. `npm run dev / start`
+
+    启动本地调试服务器。
+
+2. `npm run build / dist-js / dev-js`
+
+    编译发行（压缩 / 混淆）版本的js
+
+3. `npm run fix`
+
+    Eslint 修复
+
+4. `npm run server`
+
+    预览打包之后的js
+
 ## 设计目的
 
 1.方便更多的前端开发快速接入前端埋点。
@@ -17,6 +37,7 @@
 ├── dist
 ├── public
 ├── src // 项目文件目录
+├── test
 ```
 
 * JS-SDK具备获取平台信息的能力

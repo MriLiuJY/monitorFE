@@ -1,10 +1,13 @@
 {
   "name": "fe-monitor",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1-beta",
+  "description": "Front End buried point",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index",
+    "dev": "node server/index",
+    "server": "node server/server"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,22 @@
   "bugs": {
     "url": "https://github.com/MriLiuJY/FE-Monitor/issues"
   },
-  "homepage": "https://github.com/MriLiuJY/FE-Monitor#readme"
+  "homepage": "https://github.com/MriLiuJY/FE-Monitor#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "body-parser": "^1.19.0",
+    "es3ify-loader": "^0.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.17.3",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "uglifyjs-webpack-plugin": "^2.1.3",
+    "webpack": "^4.34.0",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0"
+  }
 }
