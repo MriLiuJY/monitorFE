@@ -14,7 +14,7 @@
 
     编译发行（压缩 / 混淆）版本的js
 
-3. `npm run fix`
+3. `npm run lint`
 
     Eslint 修复
 
