@@ -19,6 +19,6 @@ app.use("/index", (req, res) => {
 
 
 const point = 8081;
-console.log("Your server listen at " + "http://localhost:" +point + "/index");
+console.log("打包测试地址： " + "http://localhost:" +point + "/index");
 app.listen(point);
 
