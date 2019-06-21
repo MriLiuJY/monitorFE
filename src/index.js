@@ -5,9 +5,13 @@
  */
 
 import Wrap from "./wrap";
+import Config from "./config";
 
 /* eslint-disable */
-function initMonitor(config) {
+function initMonitor(userConfig) {
+  let config = new Config(userConfig);
+
+  console.log(config);
 
   // 获取 wrap
   let wrap = new Wrap();
