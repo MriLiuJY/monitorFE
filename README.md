@@ -54,3 +54,11 @@
 4. `npm run server`
 
     预览打包之后的js
+
+
+## License
+---
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2019 MriLiuJY

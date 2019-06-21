@@ -18,7 +18,7 @@ app.use("/index", (req, res) => {
 });
 
 
-const point = 8081;
+const point = 9999;
 console.log("打包测试地址： " + "http://localhost:" +point + "/index");
 app.listen(point);
 
