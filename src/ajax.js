@@ -35,7 +35,7 @@ const ajax =  (function() {
         }
       };
       xhr.send(window.JSON.stringify(data));
-    }
+    } 
   }
 })();
 

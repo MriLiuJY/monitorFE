@@ -7,8 +7,10 @@
 
 /* eslint-disable */
 function initMonitor(config) {
-  // console.log(config);
+  console.log(config);
   return config + 1;
 }
+
+window.initMonitor = initMonitor;
 
 module.exports = initMonitor;
