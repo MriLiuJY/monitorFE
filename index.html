@@ -41,9 +41,10 @@
 
   <!-- 资源没有加载 -->
   <p>资源没有加载</p>
-  <button>没有加载javascript</button>
-  <button>没有加载css</button>
-  <button>没有加载image</button>
+  <button class="err-js-load">没有加载javascript</button>
+  <button class="err-css-load">没有加载css</button>
+  <button class="err-image-load">没有加载image</button>
+  <button class="err-iframe-load">没有加载iframe</button>
   <hr>
 
   <!-- 第三方资源错误 -->
@@ -55,6 +56,7 @@
   apikey="c57c87db91d85b9044db147237fba16d8273678123b2f1ca3d1f96f4d2e5f36f"></script> -->
 
   <script src="../dist/js/monitor.js"></script>
+  <script src="./createError.js"></script>
   <script>
     var config = {
       // name: 'test',
@@ -71,29 +73,6 @@
     })
 
     initMonitor(config);
-
-    setTimeout(() => {
-      console.log(111);
-      // js
-      var script = document.createElement("script");
-      script.src = `./js/undefied.js`;
-      document.body.appendChild(script);
-
-      // css
-      // var css = document.createElement("style");
-      // css.src = `./js/undefied.css`;
-      // document.head.appendChild(css);
-
-      // img
-      // var img = document.createElement("image");
-      // img.src = `./js/undefied.png`;
-      // document.body.appendChild(img);
-
-      // iframe
-      // var iframe = document.createElement("iframe");
-      // iframe.src = `./js/undefied.html`;
-      // document.body.appendChild(iframe);
-    }, 1000);
   </script>
 </body>
 </html>

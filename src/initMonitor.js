@@ -31,9 +31,8 @@ InitMonitor.prototype = {
     // 监听全局下的error事件
     window.addEventListener("error", function(err) {
       new GetError(err);
-    }, true)
+    }, true);
   },
-  _getError: function() {},
   _send: function () {},
 }
 

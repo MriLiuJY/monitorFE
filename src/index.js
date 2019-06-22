@@ -15,7 +15,8 @@ function monitor(userConfig) {
   // }
 
   // test code 
-  throw new Error("index test throw error");
+  // throw new Error("index test throw error");
+  // throw new EvalError();
   return init;
 }
 
