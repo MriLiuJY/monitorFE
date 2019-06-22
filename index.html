@@ -64,8 +64,36 @@
     };
 
     // fundebug.test();
+    // console.log(initMonitor);
+    window.addEventListener("error", function(err) {
+      console.log(err);
+      console.log(111);
+    })
 
     initMonitor(config);
+
+    setTimeout(() => {
+      console.log(111);
+      // js
+      var script = document.createElement("script");
+      script.src = `./js/undefied.js`;
+      document.body.appendChild(script);
+
+      // css
+      // var css = document.createElement("style");
+      // css.src = `./js/undefied.css`;
+      // document.head.appendChild(css);
+
+      // img
+      // var img = document.createElement("image");
+      // img.src = `./js/undefied.png`;
+      // document.body.appendChild(img);
+
+      // iframe
+      // var iframe = document.createElement("iframe");
+      // iframe.src = `./js/undefied.html`;
+      // document.body.appendChild(iframe);
+    }, 1000);
   </script>
 </body>
 </html>

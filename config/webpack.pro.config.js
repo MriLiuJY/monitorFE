@@ -10,7 +10,7 @@ const metadata = require("../version");
 module.exports = (env) => {
   return {
     mode: "production",
-    entry: "./src/index.js",
+    entry: "./index.js",
     output: {
       publicPath: "/dist/js/",
       filename: `monitor.${metadata.version}.js`,

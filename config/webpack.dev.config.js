@@ -4,7 +4,7 @@ const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.js",
+  entry: "./index.js",
   output: {
     publicPath: "/dist/js/",
     filename: "monitor.js",

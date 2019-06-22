@@ -4,28 +4,23 @@
  * @version 0.0.1-beta
  */
 
-import Wrap from "./wrap";
-import Config from "./config";
-
 /* eslint-disable */
-function initMonitor(userConfig) {
-  let config = new Config(userConfig);
+import InitMonitor from "./initMonitor";
 
-  console.log(config);
+function monitor(userConfig) {
+  const init = new InitMonitor(userConfig);
 
-  // 获取 wrap
-  let wrap = new Wrap();
-  let data = {};
-  data.wrap = wrap._geWrap();
-  wrap._getIP(
-    function(ip){
-      data.ip = ip;
-    }
-  );
+  // if (callbak) {
+    // callbak()
+  // }
 
-  console.log(data);
+  // test code 
+  throw new Error("index test throw error");
+  return init;
 }
 
-window.initMonitor = initMonitor;
+monitor.prototype = {
+  _destory: function() {},
+}
 
-module.exports = initMonitor;
+module.exports = monitor;
