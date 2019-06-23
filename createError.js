@@ -1,4 +1,20 @@
 
+// ----- ajax请求错误 ---- 
+
+// ajax请求错误
+var ajaxRequestError = document.getElementsByClassName("err-ajax-request")[0];
+ajaxRequestError.onclick = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.timeout = 30000;
+  xhr.open("get", '/ajaxerror', true);
+  xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.send();
+}
+
+
+
 // ----- 资源加载异常 ---- 
 
 // js

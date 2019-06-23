@@ -23,15 +23,74 @@ function InitMonitor(userConfig) {
       data.ip = ip;
     }
   );
-  self._init()
+  self._initListenJS();
+  self._initListenAjax();
 }
 
 InitMonitor.prototype = {
-  _init: function() {
+  _initListenJS: function() {
     // 监听全局下的error事件
     window.addEventListener("error", function(err) {
       new GetError(err);
     }, true);
+  },
+  _initListenAjax: function () {
+    console.log("_initListenAjax");
+    function ajaxEventTrigger(event) {
+      var ajaxEvent = new CustomEvent(event, { detail: this });
+      window.dispatchEvent(ajaxEvent);
+     }
+      
+     var oldXHR = window.XMLHttpRequest;
+     
+     function newXHR() {
+      var realXHR = new oldXHR();
+      // console.log(111);
+     
+      realXHR.addEventListener('abort', function ($event) {
+        console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxAbort'); },
+      false);
+     
+      realXHR.addEventListener('error', function ($event) {
+        console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxError');
+      }, false);
+     
+      realXHR.addEventListener('load', function ($event) {
+        console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxLoad');
+      }, false);
+     
+      realXHR.addEventListener('loadstart', function () {
+        // console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxLoadStart');
+      }, false);
+     
+      realXHR.addEventListener('progress', function () {
+        // console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxProgress');
+      }, false);
+     
+      realXHR.addEventListener('timeout', function () {
+        // console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxTimeout');
+      }, false);
+     
+      realXHR.addEventListener('loadend', function () {
+        // console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxLoadEnd');
+      }, false);
+     
+      realXHR.addEventListener('readystatechange', function() {
+        // console.log($event);
+        ajaxEventTrigger.call(this, 'ajaxReadyStateChange');
+      }, false);
+     
+      return realXHR;
+     }
+     
+     window.XMLHttpRequest = newXHR;
   },
   _send: function () {},
 }
