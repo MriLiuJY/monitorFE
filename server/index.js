@@ -58,11 +58,16 @@ app.use("/index", (req, res) => {
   });
 });
 
-app.use("/test.php", (req, res) => {
-  console.log(1111);
+// create 500 in server
+app.use("/servererr", (req, res) => {
+  reqq;
   res.send({
     status: "success",
   });
+});
+
+// timeout
+app.use("/timeout", (req, res) => {
 });
 
 const point = 9998;

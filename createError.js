@@ -6,13 +6,48 @@ var ajaxRequestError = document.getElementsByClassName("err-ajax-request")[0];
 ajaxRequestError.onclick = function () {
   var xhr = new XMLHttpRequest();
   xhr.withCredentials = true;
-  xhr.timeout = 30000;
+  xhr.timeout = 3000;
   xhr.open("get", '/ajaxerror', true);
   xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
   xhr.setRequestHeader("Accept", "application/json");
   xhr.send();
 }
 
+// server 500 error
+var servererrAjax = document.getElementsByClassName("servererr-ajax-request")[0];
+servererrAjax.onclick = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.timeout = 3000;
+  xhr.open("get", '/servererr', true);
+  xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.send();
+}
+
+// ajax失败
+var ajaxFailed = document.getElementsByClassName("fail-ajax-request")[0];
+ajaxFailed.onclick = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.timeout = 3000;
+  xhr.open("get", '/servererr', true);
+  xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.send();
+}
+
+// ajax请求超时
+var ajaxTimeout = document.getElementsByClassName("timeout-ajax-request")[0];
+ajaxTimeout.onclick = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.timeout = 3000;
+  xhr.open("get", '/timeout', true);
+  xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.send();
+}
 
 
 // ----- 资源加载异常 ---- 

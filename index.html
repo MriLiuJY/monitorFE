@@ -24,8 +24,9 @@
   <!-- ajax请求错误 -->
   <p>ajax请求错误</p>
   <button class="err-ajax-request">ajax请求错误</button>
-  <button>ajax失败</button>
-  <button>ajax超时</button>
+  <button class="servererr-ajax-request">服务端错误</button>
+  <button class="fail-ajax-request">ajax失败</button>
+  <button class="timeout-ajax-request">ajax超时</button>
   <button>jsonp请求失败</button>
   <hr>
 
@@ -67,6 +68,11 @@
     // console.log(initMonitor);
     window.addEventListener("error", function(err) {
       console.log(err);
+    });
+
+    window.addEventListener('ajaxTimeout', function (e) {
+      console.log("ajaxTimeout");
+      console.log(e.detail); // XMLHttpRequest Object
     });
 
     window.addEventListener('ajaxLoad', function (e) {

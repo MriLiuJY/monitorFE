@@ -9,14 +9,7 @@ import InitMonitor from "./initMonitor";
 
 function monitor(userConfig) {
   const init = new InitMonitor(userConfig);
-
-  // if (callbak) {
-    // callbak()
-  // }
-
-  // test code 
-  // throw new Error("index test throw error");
-  // throw new EvalError();
+  
   return init;
 }
 

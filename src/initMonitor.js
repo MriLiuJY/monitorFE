@@ -45,45 +45,16 @@ InitMonitor.prototype = {
      
      function newXHR() {
       var realXHR = new oldXHR();
-      // console.log(111);
-     
-      realXHR.addEventListener('abort', function ($event) {
-        console.log($event);
-        ajaxEventTrigger.call(this, 'ajaxAbort'); },
-      false);
-     
-      realXHR.addEventListener('error', function ($event) {
-        console.log($event);
-        ajaxEventTrigger.call(this, 'ajaxError');
-      }, false);
      
       realXHR.addEventListener('load', function ($event) {
-        console.log($event);
         ajaxEventTrigger.call(this, 'ajaxLoad');
       }, false);
      
-      realXHR.addEventListener('loadstart', function () {
-        // console.log($event);
-        ajaxEventTrigger.call(this, 'ajaxLoadStart');
-      }, false);
-     
-      realXHR.addEventListener('progress', function () {
-        // console.log($event);
-        ajaxEventTrigger.call(this, 'ajaxProgress');
-      }, false);
-     
       realXHR.addEventListener('timeout', function () {
-        // console.log($event);
         ajaxEventTrigger.call(this, 'ajaxTimeout');
       }, false);
      
-      realXHR.addEventListener('loadend', function () {
-        // console.log($event);
-        ajaxEventTrigger.call(this, 'ajaxLoadEnd');
-      }, false);
-     
       realXHR.addEventListener('readystatechange', function() {
-        // console.log($event);
         ajaxEventTrigger.call(this, 'ajaxReadyStateChange');
       }, false);
      
