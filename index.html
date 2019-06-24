@@ -52,7 +52,8 @@
   <button>第三方资源错误</button>
   <hr>
 
-  <script src="../dist/js/monitor.js"></script>
+  <!-- 注意这里必须加 crossorigin="anonymous" 否则在引入的时候会因为是第三方资源无法收集完整报错信息 -->
+  <script crossorigin="anonymous" src="../dist/js/monitor.js"></script>
   <script src="./createError.js"></script>
   <script>
     var config = {
