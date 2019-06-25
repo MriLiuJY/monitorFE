@@ -50,6 +50,14 @@ ajaxTimeout.onclick = function () {
 }
 
 
+// ----- js 执行错误 ----
+
+// js 执行错误
+var jsRunningerror = document.getElementsByClassName("js-running-error")[0];
+jsRunningerror.onclick = function () {
+}
+
+
 // ----- 资源加载异常 ---- 
 
 // js
@@ -84,4 +92,7 @@ iframeload.onclick = function () {
 }
 
 
-      
+// ------ 第三方资源错误 ------
+var resourceError = document.getElementsByClassName("other-resource-error")[0];
+resourceError.onclick = function () {
+}

@@ -66,9 +66,8 @@ app.use("/servererr", (req, res) => {
   });
 });
 
-// timeout
-app.use("/timeout", (req, res) => {
-});
+// timeout no res
+app.use("/timeout", (req, res) => {});
 
 const point = 9998;
 console.log("Your server listen at " + "http://localhost:" +point + "/index");

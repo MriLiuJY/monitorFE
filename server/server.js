@@ -17,6 +17,17 @@ app.use("/index", (req, res) => {
   });
 });
 
+// create 500 in server
+app.use("/servererr", (req, res) => {
+  reqq;
+  res.send({
+    status: "success",
+  });
+});
+
+// timeout no res
+app.use("/timeout", (req, res) => {});
+
 
 const point = 9999;
 console.log("打包测试地址： " + "http://localhost:" +point + "/index");

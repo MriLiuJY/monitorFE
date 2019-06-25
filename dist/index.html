@@ -23,21 +23,22 @@
 
   <!-- ajax请求错误 -->
   <p>ajax请求错误</p>
-  <button>ajax请求错误</button>
-  <button>ajax失败</button>
-  <button>ajax超时</button>
+  <button class="err-ajax-request">ajax请求错误</button>
+  <button class="servererr-ajax-request">服务端错误</button>
+  <button class="fail-ajax-request">ajax失败</button>
+  <button class="timeout-ajax-request">ajax超时</button>
   <button>jsonp请求失败</button>
   <hr>
 
   <!-- js执行错误 -->
   <p>js执行错误</p>
-  <button>js执行错误</button>
+  <button class="js-running-error">js执行错误</button>
   <hr>
 
   <!-- js内存泄漏 -->
-  <p>js内存泄漏</p>
+  <!-- <p>js内存泄漏</p>
   <button>js内存泄漏</button>
-  <hr>
+  <hr> -->
 
   <!-- 资源没有加载 -->
   <p>资源没有加载</p>
@@ -49,7 +50,7 @@
 
   <!-- 第三方资源错误 -->
   <p>第三方资源错误</p>
-  <button>第三方资源错误</button>
+  <button class="other-resource-error">第三方资源错误</button>
   <hr>
 
   <script src="../version.js"></script>
