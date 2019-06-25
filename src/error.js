@@ -38,9 +38,16 @@ export const getError = function(err) {
 const getJsError = function(err) {
   console.log(err);
   // 处理err 上报
+  let data = ajax.getWraper(err, Wrap)
+    ajax.post("/monitor", data,
+    function() {},
+    function(error) {
+      console.log(error);
+    });
 }
 
 // 资源加载错误
 const geetResourceError = function (err) {
   console.log(err);
+  console.log("geetResourceError");
 }

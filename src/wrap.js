@@ -37,6 +37,12 @@ Wrap.prototype = {
     // languages
     data.language = navigator.language;
 
+    // url
+    data.url = window.location.href;
+
+    // time
+    data.time = (new Date()).getTime();
+
     return data;
   },
   // webrtc 获取 IP

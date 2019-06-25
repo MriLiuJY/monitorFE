@@ -55,6 +55,7 @@ ajaxTimeout.onclick = function () {
 // js 执行错误
 var jsRunningerror = document.getElementsByClassName("js-running-error")[0];
 jsRunningerror.onclick = function () {
+  jsRunningerrorssss;
 }
 
 

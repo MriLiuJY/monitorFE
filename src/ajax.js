@@ -44,9 +44,16 @@ const ajax =  (function() {
       wrap._getIP(function(ip) {
         data.ip = ip;
       });
-      data.responseURL = err.detail.responseURL;
-      data.status = err.detail.status;
-      data.statusText = err.detail.statusText;
+      if (err.type === "ajaxLoad") {
+        data.responseURL = err.detail.responseURL;
+        data.status = err.detail.status;
+        data.statusText = err.detail.statusText;
+      } else if (err.type === "error") {
+        data.message = err.message;
+        data.line = err.lineno;
+        data.filename = err.filename;
+      }
+      console.log(err);
       return data
     },
   }
