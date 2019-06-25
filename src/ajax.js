@@ -11,9 +11,9 @@ const ajax =  (function() {
     canAjax: function() {
       return (window.XMLHttpRequest && window.JSON);
     },
-    post: function(config, url, data, timeout) {
+    post: function(url, data, timeout) {
       var xhr = new XMLHttpRequest();
-      xhr.open(config.type, url, true);
+      xhr.open("post", url, true);
       xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
       xhr.setRequestHeader("Accept", "application/json");
       xhr.withCredentials = true;
@@ -37,7 +37,18 @@ const ajax =  (function() {
         }
       };
       xhr.send(window.JSON.stringify(data));
-    } 
+    },
+    getWraper: function(err, Wrap) {
+      let wrap = new Wrap();
+      let data = wrap._geWrap();
+      wrap._getIP(function(ip) {
+        data.ip = ip;
+      });
+      data.responseURL = err.detail.responseURL;
+      data.status = err.detail.status;
+      data.statusText = err.detail.statusText;
+      return data
+    },
   }
 })();
 

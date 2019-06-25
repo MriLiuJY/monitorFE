@@ -13,27 +13,14 @@ export const getServerError = function() {};
 
 // 
 export const ajaxError = function(err) {
-  console.log("ajaxError ------", err);
   // 处理err 上报
-  let wrap = new Wrap();
-  let data = wrap._geWrap();
-  wrap._getIP(
-    function(ip) {
-      data.ip = ip;
-    }
-  );
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
-    data.responseURL = err.detail.responseURL;
-    data.status = err.detail.status;
-    data.statusText = err.detail.statusText;
-    console.log(data);
-    if (ajax.canAjax()) {
-      ajax.post({type: "post"}, "/monitor", data,
-      function() {},
-      function(err) {
-        console.log(err);
-      });
-    }
+    let data = ajax.getWraper(err, Wrap)
+    ajax.post("/monitor", data,
+    function() {},
+    function(error) {
+      console.log(error);
+    });
   }
 }
 

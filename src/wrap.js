@@ -5,7 +5,6 @@
  */
 
 /* eslint-disable */
-
 function Wrap() {
   const self = this;
   self.data = self._geWrap();

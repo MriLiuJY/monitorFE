@@ -4,7 +4,6 @@
  * @version 0.0.1-beta
  */
 
-import Wrap from "./wrap";
 import Config from "./config";
 import { getError, ajaxError } from "./error";
 
@@ -13,15 +12,7 @@ function InitMonitor(userConfig) {
   let self = this;
   let config = new Config(userConfig);
   self._config = config;
-
-  // 获取 wrap
-  let wrap = new Wrap();
-  let data = {};
-  wrap._getIP(
-    function(ip) {
-      data.ip = ip;
-    }
-  );
+  
   self._initListenJS();
   self._initListenAjax();
 }
