@@ -6,7 +6,7 @@
 
 import Wrap from "./wrap";
 import Config from "./config";
-import { GetError } from "./error";
+import { getError, ajaxError } from "./error";
 
 /* eslint-disable */
 function InitMonitor(userConfig) {
@@ -17,7 +17,6 @@ function InitMonitor(userConfig) {
   // 获取 wrap
   let wrap = new Wrap();
   let data = {};
-  data.wrap = wrap._geWrap();
   wrap._getIP(
     function(ip) {
       data.ip = ip;
@@ -31,11 +30,11 @@ InitMonitor.prototype = {
   _initListenJS: function() {
     // 监听全局下的error事件
     window.addEventListener("error", function(err) {
-      new GetError(err);
+      getError(err);
     }, true);
   },
   _initListenAjax: function () {
-    console.log("_initListenAjax");
+    let self = this;
     function ajaxEventTrigger(event) {
       var ajaxEvent = new CustomEvent(event, { detail: this });
       window.dispatchEvent(ajaxEvent);
@@ -62,6 +61,23 @@ InitMonitor.prototype = {
      }
      
      window.XMLHttpRequest = newXHR;
+     self._startLintenAjax();
+  },
+  _startLintenAjax() {
+    // ajax error
+    window.addEventListener("error", function(err) {
+      ajaxError(err);
+    });
+    
+    // ajax timeout
+    window.addEventListener("ajaxTimeout", function(err) {
+      ajaxError(err);
+    });
+
+    // ajax load error
+    window.addEventListener("ajaxLoad", function(err) {
+      ajaxError(err);
+    });
   },
   _send: function () {},
 }

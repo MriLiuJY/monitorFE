@@ -66,19 +66,16 @@
 
     // fundebug.test();
     // console.log(initMonitor);
-    window.addEventListener("error", function(err) {
-      console.log(err);
-    });
 
-    window.addEventListener('ajaxTimeout', function (e) {
-      console.log("ajaxTimeout");
-      console.log(e.detail); // XMLHttpRequest Object
-    });
+    // window.addEventListener('ajaxTimeout', function (e) {
+    //   console.log("ajaxTimeout");
+    //   console.log(e.detail); // XMLHttpRequest Object
+    // });
 
-    window.addEventListener('ajaxLoad', function (e) {
-      console.log("ajaxLoad");
-      console.log(e.detail); // XMLHttpRequest Object
-    });
+    // window.addEventListener('ajaxLoad', function (e) {
+    //   console.log("ajaxLoad");
+    //   console.log(e.detail); // XMLHttpRequest Object
+    // });
 
     initMonitor(config);
   </script>

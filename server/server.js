@@ -29,6 +29,12 @@ app.use("/servererr", (req, res) => {
 app.use("/timeout", (req, res) => {});
 
 
+// timeout no res
+app.use("/monitor", (req, res) => {
+  res.send({});
+});
+
+
 const point = 9999;
 console.log("打包测试地址： " + "http://localhost:" +point + "/index");
 app.listen(point);

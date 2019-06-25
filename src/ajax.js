@@ -4,6 +4,8 @@
  * @version 0.0.1-beta
  */
 
+
+/* eslint-disable */
 const ajax =  (function() {
   return {
     canAjax: function() {
