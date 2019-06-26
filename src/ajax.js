@@ -38,7 +38,7 @@ const ajax =  (function() {
       };
       xhr.send(window.JSON.stringify(data));
     },
-    getWraper: function(err, Wrap) {
+    getWraper: function(err, Wrap, resource) {
       let wrap = new Wrap();
       let data = wrap._geWrap();
       wrap._getIP(function(ip) {
@@ -48,10 +48,15 @@ const ajax =  (function() {
         data.responseURL = err.detail.responseURL;
         data.status = err.detail.status;
         data.statusText = err.detail.statusText;
+        data.type = "ajaxLoad";
       } else if (err.type === "error") {
         data.message = err.message;
         data.line = err.lineno;
         data.filename = err.filename;
+        data.type = "error";
+      } else if (resource) {
+        data.src = err.target.src;
+        data.type = "resource";
       }
       console.log(err);
       return data

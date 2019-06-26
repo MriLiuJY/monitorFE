@@ -36,9 +36,9 @@ export const getError = function(err) {
 
 // js 抛出的错误
 const getJsError = function(err) {
-  console.log(err);
   // 处理err 上报
-  let data = ajax.getWraper(err, Wrap)
+  console.log(err);
+  let data = ajax.getWraper(err, Wrap);
     ajax.post("/monitor", data,
     function() {},
     function(error) {
@@ -48,6 +48,10 @@ const getJsError = function(err) {
 
 // 资源加载错误
 const geetResourceError = function (err) {
-  console.log(err);
-  console.log("geetResourceError");
+  let data = ajax.getWraper(err, Wrap, true);
+    ajax.post("/monitor", data,
+    function() {},
+    function(error) {
+      console.log(error);
+    });
 }
