@@ -15,9 +15,8 @@ export const getServerError = function() {};
 export const ajaxError = function(err) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
-    let data = ajax.getWraper(err, Wrap)
-    ajax.post("/monitor", data,
-    function() {},
+    let data = new Wrap()._getErrorMessage(err);
+    ajax.post("/monitor", data, function() {},
     function(error) {
       console.log(error);
     });
@@ -36,14 +35,12 @@ export const getError = function(err) {
 
 // js 抛出的错误
 const getJsError = function(err) {
-  // 处理err 上报
-  console.log(err);
-  let data = ajax.getWraper(err, Wrap);
-    ajax.post("/monitor", data,
-    function() {},
-    function(error) {
-      console.log(error);
-    });
+  let data = new Wrap()._getErrorMessage(err);
+  ajax.post("/monitor", data,
+  function() {},
+  function(error) {
+    console.log(error);
+  });
 }
 
 // 资源加载错误

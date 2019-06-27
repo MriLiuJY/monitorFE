@@ -102,6 +102,31 @@ Wrap.prototype = {
         ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
     };
   },
+  // 处理错误信息
+  _getErrorMessage: function(err, resource) {
+    const self = this;
+    let data = self._geWrap();
+    self._getIP(function(ip) {
+      data.ip = ip;
+    });
+    if (err.type === "ajaxLoad") {
+      data.responseURL = err.detail.responseURL;
+      data.status = err.detail.status;
+      data.statusText = err.detail.statusText;
+      data.type = "ajaxLoad";
+    } else if (err.type === "error") {
+      data.message = err.message;
+      data.line = err.lineno;
+      data.filename = err.filename;
+      data.type = "error";
+    } else if (resource) {
+      data.src = err.target.src;
+      data.type = "resource";
+    }
+
+    console.log(data);
+    return data
+  },
 }
 
 module.exports = Wrap;
