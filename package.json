@@ -43,9 +43,10 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
-    "webpack-cli": "^3.3.4",
+    "compression-webpack-plugin": "^3.0.0",
     "express": "^4.17.1",
-    "express-session": "^1.16.2"
+    "express-session": "^1.16.2",
+    "webpack-cli": "^3.3.4"
   },
   "config": {
     "commitizen": {

@@ -6,6 +6,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const metadata = require("../version");
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = (env) => {
   return {
@@ -21,6 +22,7 @@ module.exports = (env) => {
     },
     plugins: [
       new webpack.HashedModuleIdsPlugin(),
+      new CompressionWebpackPlugin(),
     ],
     module: {
       rules: [

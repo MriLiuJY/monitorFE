@@ -282,27 +282,10 @@ const ajax = function () {
 
       xhr.send(window.JSON.stringify(data));
     },
-    getWraper: function (err, Wrap) {
+    getWraper: function (err, Wrap, resource) {
       let wrap = new Wrap();
 
       let data = wrap._geWrap();
-
-      wrap._getIP(function (ip) {
-        data.ip = ip;
-      });
-
-      if (err.type === "ajaxLoad") {
-        data.responseURL = err.detail.responseURL;
-        data.status = err.detail.status;
-        data.statusText = err.detail.statusText;
-      } else if (err.type === "error") {
-        data.message = err.message;
-        data.line = err.lineno;
-        data.filename = err.filename;
-      }
-
-      console.log(err);
-      return data;
     }
   };
 }();
@@ -403,6 +386,35 @@ Wrap.prototype = {
       if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
       ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
     };
+  },
+  // 处理错误信息
+  _getErrorMessage: function (err, resource) {
+    const self = this;
+
+    let data = self._geWrap();
+
+    self._getIP(function (ip) {
+      data.ip = ip;
+    });
+
+    data.detail = {};
+
+    if (err.type === "ajaxLoad") {
+      data.detail.responseURL = err.detail.responseURL;
+      data.detail.status = err.detail.status;
+      data.detail.statusText = err.detail.statusText;
+      data.detail.type = "ajaxLoad";
+    } else if (err.type === "error") {
+      data.detail.message = err.message;
+      data.detail.line = err.lineno;
+      data.detail.filename = err.filename;
+      data.detail.type = "error";
+    } else if (resource) {
+      data.detail.src = err.target.src;
+      data.detail.type = "resource";
+    }
+
+    return data;
   }
 };
 module.exports = Wrap;
@@ -471,7 +483,7 @@ exports.getServerError = getServerError;
 const ajaxError = function (err) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
-    let data = _ajax.ajax.getWraper(err, _wrap.default);
+    let data = new _wrap.default()._getErrorMessage(err);
 
     _ajax.ajax.post("/monitor", data, function () {}, function (error) {
       console.log(error);
@@ -495,9 +507,7 @@ const getError = function (err) {
 exports.getError = getError;
 
 const getJsError = function (err) {
-  console.log(err); // 处理err 上报
-
-  let data = _ajax.ajax.getWraper(err, _wrap.default);
+  let data = new _wrap.default()._getErrorMessage(err);
 
   _ajax.ajax.post("/monitor", data, function () {}, function (error) {
     console.log(error);
@@ -506,8 +516,11 @@ const getJsError = function (err) {
 
 
 const geetResourceError = function (err) {
-  console.log(err);
-  console.log("geetResourceError");
+  let data = _ajax.ajax.getWraper(err, _wrap.default, true);
+
+  _ajax.ajax.post("/monitor", data, function () {}, function (error) {
+    console.log(error);
+  });
 };
 
 /***/ })
