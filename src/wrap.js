@@ -109,23 +109,22 @@ Wrap.prototype = {
     self._getIP(function(ip) {
       data.ip = ip;
     });
+    data.detail = {};
     if (err.type === "ajaxLoad") {
-      data.responseURL = err.detail.responseURL;
-      data.status = err.detail.status;
-      data.statusText = err.detail.statusText;
-      data.type = "ajaxLoad";
+      data.detail.responseURL = err.detail.responseURL;
+      data.detail.status = err.detail.status;
+      data.detail.statusText = err.detail.statusText;
+      data.detail.type = "ajaxLoad";
     } else if (err.type === "error") {
-      data.message = err.message;
-      data.line = err.lineno;
-      data.filename = err.filename;
-      data.type = "error";
+      data.detail.message = err.message;
+      data.detail.line = err.lineno;
+      data.detail.filename = err.filename;
+      data.detail.type = "error";
     } else if (resource) {
-      data.src = err.target.src;
-      data.type = "resource";
+      data.detail.src = err.target.src;
+      data.detail.type = "resource";
     }
-
-    console.log(data);
-    return data
+    return data;
   },
 }
 
