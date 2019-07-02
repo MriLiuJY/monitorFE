@@ -23,6 +23,13 @@ InitMonitor.prototype = {
     window.addEventListener("error", function(err) {
       getError(err);
     }, true);
+
+    // 监听全局下的 Promise 错误
+    window.addEventListener("unhandledrejection", function(err){
+      console.log(err);
+      getError(err);
+      return true;
+    });
   },
   _initListenAjax: function () {
     let self = this;

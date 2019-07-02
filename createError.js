@@ -58,6 +58,14 @@ jsRunningerror.onclick = function () {
   jsRunningerrorssss;
 }
 
+// Promise 错误
+var promiseError = document.getElementsByClassName("promise-error")[0];
+promiseError.onclick = function () {
+  new Promise((resolve, rejects) => {
+    rejects();
+  })
+}
+
 
 // ----- 资源加载异常 ---- 
 
