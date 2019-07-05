@@ -178,7 +178,13 @@ InitMonitor.prototype = {
     // 监听全局下的error事件
     window.addEventListener("error", function (err) {
       (0, _error.getError)(err);
-    }, true);
+    }, true); // 监听全局下的 Promise 错误
+
+    window.addEventListener("unhandledrejection", function (err) {
+      console.log(err);
+      (0, _error.getError)(err);
+      return true;
+    });
   },
   _initListenAjax: function () {
     let self = this;
@@ -475,7 +481,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* eslint-disable */
 // 服务端返回错误
-const getServerError = function () {}; // 
+const getServerError = function () {}; // ajaxError
 
 
 exports.getServerError = getServerError;

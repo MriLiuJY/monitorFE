@@ -11,7 +11,7 @@ import Wrap from "./wrap";
 // 服务端返回错误
 export const getServerError = function() {};
 
-// 
+// ajaxError
 export const ajaxError = function(err) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
