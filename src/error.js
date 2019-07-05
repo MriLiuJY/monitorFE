@@ -16,7 +16,7 @@ export const ajaxError = function(err, config) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
     let data = new Wrap()._getErrorMessage(err);
-    ajax.post(config.url, data, function() {},
+    ajax.post(config.protocol + config.url, data, function() {},
     function(error) {
       console.log(error);
     });
@@ -36,7 +36,7 @@ export const getError = function(err, config) {
 // js 抛出的错误
 const getJsError = function(err, config) {
   let data = new Wrap()._getErrorMessage(err);
-  ajax.post(config.url, data,
+  ajax.post(config.protocol + config.url, data,
   function() {},
   function(error) {
     console.log(error);
@@ -46,7 +46,7 @@ const getJsError = function(err, config) {
 // 资源加载错误
 const geetResourceError = function (err, config) {
   let data = ajax.getWraper(err, Wrap, true);
-    ajax.post(config.url, data,
+    ajax.post(config.protocol + config.url, data,
     function() {},
     function(error) {
       console.log(error);

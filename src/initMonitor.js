@@ -12,6 +12,11 @@ function InitMonitor(userConfig) {
   let self = this;
   let config = new Config(userConfig);
   self._config = config;
+
+  self._config.protocol = window.location.protocol + "//";
+  if (config.https) {
+    self._config.protocol = 'https://';
+  }
   
   self._initListenJS();
   self._initListenAjax();
