@@ -19,15 +19,19 @@ function InitMonitor(userConfig) {
 
 InitMonitor.prototype = {
   _initListenJS: function() {
+    const self = this;
     // 监听全局下的error事件
     window.addEventListener("error", function(err) {
-      getError(err);
+      if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
+        return;
+      } else {
+        getError(err, self._config);
+      }
     }, true);
 
     // 监听全局下的 Promise 错误
     window.addEventListener("unhandledrejection", function(err){
-      console.log(err);
-      getError(err);
+      getError(err, self._config);
       return true;
     });
   },
@@ -62,19 +66,24 @@ InitMonitor.prototype = {
      self._startLintenAjax();
   },
   _startLintenAjax() {
-    // ajax error
-    window.addEventListener("error", function(err) {
-      ajaxError(err);
-    });
+    const self = this;
     
     // ajax timeout
     window.addEventListener("ajaxTimeout", function(err) {
-      ajaxError(err);
+      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+        return;
+      } else {
+        ajaxError(err, self._config);
+      }
     });
 
     // ajax load error
     window.addEventListener("ajaxLoad", function(err) {
-      ajaxError(err);
+      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+        return;
+      } else {
+        ajaxError(err, self._config);
+      }
     });
   },
   _send: function () {},
