@@ -167,6 +167,11 @@ function InitMonitor(userConfig) {
   let self = this;
   let config = new _config.default(userConfig);
   self._config = config;
+  self._config.protocol = window.location.protocol + "//";
+
+  if (config.https) {
+    self._config.protocol = 'https://';
+  }
 
   self._initListenJS();
 
@@ -175,14 +180,18 @@ function InitMonitor(userConfig) {
 
 InitMonitor.prototype = {
   _initListenJS: function () {
-    // 监听全局下的error事件
+    const self = this; // 监听全局下的error事件
+
     window.addEventListener("error", function (err) {
-      (0, _error.getError)(err);
+      if (err.filename.indexOf('monitor') > -1 || "production" === 'development') {
+        return;
+      } else {
+        (0, _error.getError)(err, self._config);
+      }
     }, true); // 监听全局下的 Promise 错误
 
     window.addEventListener("unhandledrejection", function (err) {
-      console.log(err);
-      (0, _error.getError)(err);
+      (0, _error.getError)(err, self._config);
       return true;
     });
   },
@@ -218,17 +227,22 @@ InitMonitor.prototype = {
   },
 
   _startLintenAjax() {
-    // ajax error
-    window.addEventListener("error", function (err) {
-      (0, _error.ajaxError)(err);
-    }); // ajax timeout
+    const self = this; // ajax timeout
 
     window.addEventListener("ajaxTimeout", function (err) {
-      (0, _error.ajaxError)(err);
+      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+        return;
+      } else {
+        (0, _error.ajaxError)(err, self._config);
+      }
     }); // ajax load error
 
     window.addEventListener("ajaxLoad", function (err) {
-      (0, _error.ajaxError)(err);
+      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
+        return;
+      } else {
+        (0, _error.ajaxError)(err, self._config);
+      }
     });
   },
 
@@ -415,13 +429,31 @@ Wrap.prototype = {
       data.detail.line = err.lineno;
       data.detail.filename = err.filename;
       data.detail.type = "error";
+      data.detail.stack = err.error.stack;
     } else if (resource) {
       data.detail.src = err.target.src;
       data.detail.type = "resource";
+    } // data.jsStack = self._getCallStack();
+
+
+    console.log(data);
+    console.log(err);
+    return data;
+  },
+
+  _getCallStack() {
+    var stack = "#",
+        total = 0,
+        fn = arguments.callee;
+
+    while (fn = fn.caller) {
+      stack = stack + "" + fn.name;
+      total++;
     }
 
-    return data;
+    return stack;
   }
+
 };
 module.exports = Wrap;
 
@@ -486,12 +518,12 @@ const getServerError = function () {}; // ajaxError
 
 exports.getServerError = getServerError;
 
-const ajaxError = function (err) {
+const ajaxError = function (err, config) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status > 300) {
     let data = new _wrap.default()._getErrorMessage(err);
 
-    _ajax.ajax.post("/monitor", data, function () {}, function (error) {
+    _ajax.ajax.post(config.protocol + config.url, data, function () {}, function (error) {
       console.log(error);
     });
   }
@@ -500,31 +532,31 @@ const ajaxError = function (err) {
 
 exports.ajaxError = ajaxError;
 
-const getError = function (err) {
+const getError = function (err, config) {
   // 可以被取消的是js抛出的错误
   if (err.cancelable) {
-    getJsError(err);
+    getJsError(err, config);
   } else {
-    geetResourceError(err);
+    geetResourceError(err, config);
   }
 }; // js 抛出的错误
 
 
 exports.getError = getError;
 
-const getJsError = function (err) {
+const getJsError = function (err, config) {
   let data = new _wrap.default()._getErrorMessage(err);
 
-  _ajax.ajax.post("/monitor", data, function () {}, function (error) {
+  _ajax.ajax.post(config.protocol + config.url, data, function () {}, function (error) {
     console.log(error);
   });
 }; // 资源加载错误
 
 
-const geetResourceError = function (err) {
+const geetResourceError = function (err, config) {
   let data = _ajax.ajax.getWraper(err, _wrap.default, true);
 
-  _ajax.ajax.post("/monitor", data, function () {}, function (error) {
+  _ajax.ajax.post(config.protocol + config.url, data, function () {}, function (error) {
     console.log(error);
   });
 };
