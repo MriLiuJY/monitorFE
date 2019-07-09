@@ -120,12 +120,22 @@ Wrap.prototype = {
       data.detail.line = err.lineno;
       data.detail.filename = err.filename;
       data.detail.type = "error";
+      data.detail.stack = err.error.stack;
     } else if (resource) {
       data.detail.src = err.target.src;
       data.detail.type = "resource";
     }
+    // data.jsStack = self._getCallStack();
     return data;
   },
+  _getCallStack() {
+    var stack = "#", total = 0, fn =arguments.callee;
+    while ( (fn = fn.caller) ) {
+      stack = stack + "" + fn.name;
+      total++
+    }
+    return stack;
+}
 }
 
 module.exports = Wrap;
