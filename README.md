@@ -8,6 +8,52 @@
 2.为更多中小型的项目增加前端的报错监控。
 3.作为一款开源产品帮助更多的项目提升稳定性。
 
+## 使用
+
+### 配置项
+
+|属性|参数|默认值|可选值|说明| 
+|:----- |:-------|:-----|:-----|----- | 
+| method | String | post | POST，GET | 埋点上报请求方法 |
+| url | String | - | - | 埋点上报url地址 |
+| id | String | - | - | 标识当前用户 |
+
+可以直接 [下载](https://github.com/MriLiuJY/FE-Monitor/releases) SDK 引入自己项目中即可使用。(dist/js)目录下的打包文件。
+
+### 引入方式
+
+同源的情况下可以直接引入自己的项目中，注意请使用最新的 SDK 以获取更好的效果。
+
+```js
+<script src="https://test.com/monitor.0.0.1-beta.js"></script>
+
+<script>
+var config = {}
+  // your config
+};
+initMonitor(config);
+</script>
+```
+
+如果 JS 放在 CDN 上需要单独引入的情况下需要一些额外的 code 。
+
+```js
+<script>
+var config = {}
+  // your config
+};
+    
+var script = document.createElement("script");
+// 注意不加这个 crossOrigin 会造成第三方引入的资源无法收集页面报错详情
+script.crossOrigin = "anonymous";
+script.src = `https://test.com/monitor.0.0.1-beta.js`;
+document.body.appendChild(script);
+script.addEventListener('load', (e) => {
+  initMonitor(config);
+});
+</script>
+```
+
 ## 项目架构
 
 首先v0.1.0版本设计目的是为了做完整的异常监控，使得前端具备资源加载异常，js运行报错，样式丢失，接口返回异常的捕获能力。
