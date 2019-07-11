@@ -6,6 +6,7 @@
 
 import Config from "./config";
 import { getError, ajaxError } from "./error";
+import EventCenter from "./eventCenter";
 
 /* eslint-disable */
 function InitMonitor(userConfig) {
@@ -17,6 +18,8 @@ function InitMonitor(userConfig) {
   if (config.https) {
     self._config.protocol = 'https://';
   }
+  const eventCenter = new EventCenter();
+  self._eventCenter = eventCenter;
   
   self._initListenJS();
   self._initListenAjax();
@@ -26,33 +29,38 @@ InitMonitor.prototype = {
   _initListenJS: function() {
     const self = this;
     // 监听全局下的error事件
-    window.addEventListener("error", function(err) {
+    const error = function(err) {
+      console.log(err);
       if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
         return;
       } else {
         getError(err, self._config);
       }
-    }, true);
+    }
+    window.addEventListener("error", error, true);
+    self._setEvent(error);
 
     // 监听全局下的 Promise 错误
-    window.addEventListener("unhandledrejection", function(err){
+    const unhandledrejection = function(err){
       getError(err, self._config);
       return true;
-    });
+    }
+    window.addEventListener("unhandledrejection", unhandledrejection);
+    self._setEvent(unhandledrejection);
   },
   _initListenAjax: function () {
     let self = this;
     function ajaxEventTrigger(event) {
       var ajaxEvent = new CustomEvent(event, { detail: this });
       window.dispatchEvent(ajaxEvent);
-     }
-      
-     var oldXHR = window.XMLHttpRequest;
-     
-     function newXHR() {
+    };
+    
+    var oldXHR = window.XMLHttpRequest;
+
+    function newXHR() {
       var realXHR = new oldXHR();
      
-      realXHR.addEventListener('load', function ($event) {
+      realXHR.addEventListener('load', function () {
         ajaxEventTrigger.call(this, 'ajaxLoad');
       }, false);
      
@@ -65,12 +73,12 @@ InitMonitor.prototype = {
       }, false);
      
       return realXHR;
-     }
+    };
      
      window.XMLHttpRequest = newXHR;
      self._startLintenAjax();
   },
-  _startLintenAjax() {
+  _startLintenAjax: function() {
     const self = this;
     
     // ajax timeout
@@ -91,7 +99,10 @@ InitMonitor.prototype = {
       }
     });
   },
-  _send: function () {},
+  _setEvent: function(event) {
+    const self = this;
+    self._eventCenter._set(event);
+  },
 }
 
 module.exports = InitMonitor;
