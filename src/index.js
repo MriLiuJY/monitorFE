@@ -6,15 +6,12 @@
 
 /* eslint-disable */
 import InitMonitor from "./initMonitor";
+import Monitor from "./monitor";
 
-function monitor(userConfig) {
-  const init = new InitMonitor(userConfig);
-  
-  return init;
+function Index(userConfig, callback) {
+  callback(new Monitor());
+  // 初始化
+  return new InitMonitor(userConfig);
 }
 
-monitor.prototype = {
-  _destory: function() {},
-}
-
-module.exports = monitor;
+module.exports = Index;
