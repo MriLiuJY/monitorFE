@@ -4,12 +4,12 @@
  * @version 0.0.1-beta
  */
 
-import monitor from "./src/index";
+import Index from "./src/index";
 
-function Shell(window, func) {
-  if (!window.func) {
-    window.initMonitor = func;
+function Shell(window) {
+  if (!window.initMonitor) {
+    window.initMonitor = Index;
   }
 }
 
-Shell(window, monitor);
+Shell(window);
