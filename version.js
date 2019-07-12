@@ -1,6 +1,6 @@
 var metadata = {
   name: "FE-Monitor",
-  version: "0.0.1-beta",
+  version: "0.0.1",
   api_server: "localhost:8080",
 }
 
