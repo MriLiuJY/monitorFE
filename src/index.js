@@ -9,9 +9,11 @@ import InitMonitor from "./initMonitor";
 import Monitor from "./monitor";
 
 function Index(userConfig, callback) {
-  callback(new Monitor());
+  const init = new InitMonitor(userConfig);
+
+  callback(new Monitor(init));
   // 初始化
-  return new InitMonitor(userConfig);
+  return init;
 }
 
 module.exports = Index;
