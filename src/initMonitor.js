@@ -5,7 +5,7 @@
  */
 
 import Config from "./config";
-import { getError, ajaxError } from "./error";
+import { getJsError, geetResourceError, ajaxError } from "./error";
 import EventCenter from "./eventCenter";
 
 /* eslint-disable */
@@ -29,17 +29,24 @@ InitMonitor.prototype = {
   _initListenJS: function() {
     const self = this;
     // 监听全局下的error事件
-    const error = function(err) {
-      if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
-        return;
+    const errorEvent = function(err) {
+
+      if (err.cancelable) {
+        // 判断错误是否来自 monitor
+        if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
+          return;
+        } else {
+          getJsError(err, self._config);
+        }
       } else {
-        getError(err, self._config);
+        // 静态资源加载的error事件
+        geetResourceError(err, self._config);
       }
     }
-    window.addEventListener("error", error, true);
+    window.addEventListener("error", errorEvent, true);
     self._setEvent({
       type: "error",
-      func: error
+      func: errorEvent
     });
 
     // 监听全局下的 Promise 错误
