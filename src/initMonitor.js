@@ -37,7 +37,10 @@ InitMonitor.prototype = {
       }
     }
     window.addEventListener("error", error, true);
-    self._setEvent(error);
+    self._setEvent({
+      type: "error",
+      func: error
+    });
 
     // 监听全局下的 Promise 错误
     const unhandledrejection = function(err){
@@ -45,7 +48,10 @@ InitMonitor.prototype = {
       return true;
     }
     window.addEventListener("unhandledrejection", unhandledrejection);
-    self._setEvent(unhandledrejection);
+    self._setEvent({
+      type: "unhandledrejection",
+      func: unhandledrejection
+    });
   },
   _initListenAjax: function () {
     let self = this;
@@ -97,6 +103,10 @@ InitMonitor.prototype = {
         ajaxError(err, self._config);
       }
     });
+  },
+  _getEvent: function() {
+    const self = this;
+    return self._eventCenter._get();
   },
   _setEvent: function(event) {
     const self = this;
