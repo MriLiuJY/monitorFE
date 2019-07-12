@@ -58,6 +58,11 @@
   <button class="other-resource-error">第三方资源错误</button>
   <hr>
 
+  <!-- destory -->
+  <p>销毁实例</p>
+  <button class="destory">销毁实例</button>
+  <hr>
+
   <!-- 注意这里必须加 crossorigin="anonymous" 否则在引入的时候会因为是第三方资源无法收集完整报错信息 -->
   <script crossorigin="anonymous" src="../dist/js/monitor.js"></script>
   <script src="./createError.js"></script>
@@ -70,24 +75,11 @@
     };
 
     // fundebug.test();
-    // console.log(initMonitor);
-
-    // window.addEventListener('ajaxTimeout', function (e) {
-    //   console.log("ajaxTimeout");
-    //   console.log(e.detail); // XMLHttpRequest Object
-    // });
-
-    // window.addEventListener('ajaxLoad', function (e) {
-    //   console.log("ajaxLoad");
-    //   console.log(e.detail); // XMLHttpRequest Object
-    // });
 
     initMonitor(config, function(monitor) {
-      setTimeout(() => {
-        console.log(monitor);
-        monitor._destory();
-      }, 3000);
+      window.monitor = monitor;
     });
+
   </script>
    <!-- <script defer src="https://js.fundebug.cn/fundebug.1.8.2.min.js"
    apikey="c57c87db91d85b9044db147237fba16d8273678123b2f1ca3d1f96f4d2e5f36f"></script> -->

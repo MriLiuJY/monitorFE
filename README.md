@@ -35,7 +35,11 @@
 var config = {}
   // your config
 };
-initMonitor(config);
+initMonitor(config, function(monitor) {
+  // your code...
+  // 销毁实例
+  monitor._destory();
+});
 </script>
 ```
 
@@ -53,7 +57,11 @@ script.crossOrigin = "anonymous";
 script.src = `https://test.com/monitor.0.0.1-beta.js`;
 document.body.appendChild(script);
 script.addEventListener('load', (e) => {
-  initMonitor(config);
+  initMonitor(config, function(monitor) {
+    // your code...
+    // 销毁实例
+    monitor._destory(); 
+  });
 });
 </script>
 ```

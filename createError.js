@@ -105,3 +105,9 @@ iframeload.onclick = function () {
 var resourceError = document.getElementsByClassName("other-resource-error")[0];
 resourceError.onclick = function () {
 }
+
+// ------ 销毁实例 ------
+var destory = document.getElementsByClassName("destory")[0];
+destory.onclick = function () {
+  window.monitor._destory();
+}
