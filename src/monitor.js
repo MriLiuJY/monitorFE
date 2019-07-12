@@ -7,8 +7,6 @@ function Monitor(InitMonitor) {
 }
 
 Monitor.prototype = {
-  _init: function () {
-  },
   _destory: function() {
     const self = this;
     const array = self._InitMonitor._getEvent();
