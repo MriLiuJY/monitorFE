@@ -30,7 +30,6 @@ InitMonitor.prototype = {
     const self = this;
     // 监听全局下的error事件
     const error = function(err) {
-      console.log(err);
       if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
         return;
       } else {
