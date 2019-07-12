@@ -24,17 +24,17 @@ export const ajaxError = function(err, config) {
 }
 
 // js 内部运行错误
-export const getError = function(err, config) {
-  // 可以被取消的是js抛出的错误
-  if (err.cancelable) {
-    getJsError(err, config);
-  } else {
-    geetResourceError(err, config);
-  }
-}
+// export const getError = function(err, config) {
+//   // 可以被取消的是js抛出的错误
+//   if (err.cancelable) {
+//     getJsError(err, config);
+//   } else {
+//     geetResourceError(err, config);
+//   }
+// }
 
 // js 抛出的错误
-const getJsError = function(err, config) {
+export const getJsError = function(err, config) {
   let data = new Wrap()._getErrorMessage(err);
   ajax.post(config.protocol + config.url, data,
   function() {},
@@ -44,7 +44,7 @@ const getJsError = function(err, config) {
 }
 
 // 资源加载错误
-const geetResourceError = function (err, config) {
+export const geetResourceError = function (err, config) {
   let data = ajax.getWraper(err, Wrap, true);
     ajax.post(config.protocol + config.url, data,
     function() {},
