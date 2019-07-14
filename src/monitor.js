@@ -11,7 +11,12 @@ Monitor.prototype = {
     const self = this;
     const array = self._InitMonitor._getEvent();
     for (let i = 0; i < array.length; i++) {
-      window.removeEventListener(array[i].type, array[i].func);
+      // event type add different stage
+      if (array[i].type === 'error') {
+        window.removeEventListener(array[i].type, array[i].func, true);
+      } else {
+        window.removeEventListener(array[i].type, array[i].func);
+      }
     }
   },
 }
