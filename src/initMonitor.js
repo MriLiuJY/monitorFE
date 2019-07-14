@@ -28,8 +28,20 @@ function InitMonitor(userConfig) {
 InitMonitor.prototype = {
   _initListenJS: function() {
     const self = this;
+
+    // 监听全局下的 Promise 错误
+    let unhandledrejection = function(err){
+      getError(err, self._config);
+      return true;
+    }
+    window.addEventListener("unhandledrejection", unhandledrejection);
+    self._setEvent({
+      type: "unhandledrejection",
+      func: unhandledrejection
+    });
+    
     // 监听全局下的error事件
-    const errorEvent = function(err) {
+    let errorEvent = function(err) {
 
       if (err.cancelable) {
         // 判断错误是否来自 monitor
@@ -47,17 +59,6 @@ InitMonitor.prototype = {
     self._setEvent({
       type: "error",
       func: errorEvent
-    });
-
-    // 监听全局下的 Promise 错误
-    const unhandledrejection = function(err){
-      getError(err, self._config);
-      return true;
-    }
-    window.addEventListener("unhandledrejection", unhandledrejection);
-    self._setEvent({
-      type: "unhandledrejection",
-      func: unhandledrejection
     });
   },
   _initListenAjax: function () {
@@ -94,21 +95,31 @@ InitMonitor.prototype = {
     const self = this;
     
     // ajax timeout
-    window.addEventListener("ajaxTimeout", function(err) {
+    let ajaxTimeout = function(err) {
       if (err.detail.responseURL.indexOf(self._config.url) > -1) {
         return;
       } else {
         ajaxError(err, self._config);
       }
+    };
+    window.addEventListener("ajaxTimeout", ajaxTimeout);
+    self._setEvent({
+      type: "ajaxTimeout",
+      func: ajaxTimeout
     });
 
     // ajax load error
-    window.addEventListener("ajaxLoad", function(err) {
+    let ajaxLoad = function(err) {
       if (err.detail.responseURL.indexOf(self._config.url) > -1) {
         return;
       } else {
         ajaxError(err, self._config);
       }
+    }
+    window.addEventListener("ajaxLoad", ajaxLoad);
+    self._setEvent({
+      type: "ajaxLoad",
+      func: ajaxLoad
     });
   },
   _getEvent: function() {
