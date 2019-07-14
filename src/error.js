@@ -23,16 +23,6 @@ export const ajaxError = function(err, config) {
   }
 }
 
-// js 内部运行错误
-// export const getError = function(err, config) {
-//   // 可以被取消的是js抛出的错误
-//   if (err.cancelable) {
-//     getJsError(err, config);
-//   } else {
-//     geetResourceError(err, config);
-//   }
-// }
-
 // js 抛出的错误
 export const getJsError = function(err, config) {
   let data = new Wrap()._getErrorMessage(err);
