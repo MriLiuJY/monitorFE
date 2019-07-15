@@ -6,6 +6,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const metadata = require("../version.json");
+// const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = (env) => {
@@ -16,9 +17,6 @@ module.exports = (env) => {
       publicPath: "/dist/js/",
       filename: `monitor.${metadata.version}.js`,
       path: path.resolve(__dirname, "../dist/js/"),
-    },
-    optimization: {
-      minimizer: [],
     },
     plugins: [
       new webpack.HashedModuleIdsPlugin(),
