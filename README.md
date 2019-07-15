@@ -26,6 +26,38 @@
 
 ### 引入方式
 
+**npm 下载**
+
+```
+npm install fe-monitor-sdk
+```
+
+或者你可以使用淘宝 NPM 镜像安装:
+
+```
+npm install fe-monitor-sdk --registry=https://registry.npm.taobao.org
+```
+
+*使用*
+
+```js
+var initMonitor = require("fe-monitor-sdk");
+
+var config = {}
+  // your config
+};
+initMonitor(config, function(monitor) {
+  // your code...
+  // 销毁实例
+  monitor._destory();
+});
+```
+
+另外，浏览器并不支持 `CommonJS` 规范，因此需要使用 `Browserify` 或者 `Webpack` 等工具进行打包。
+
+
+**js 文件引入**
+
 同源的情况下可以直接引入自己的项目中，注意请使用最新的 SDK 以获取更好的效果。
 
 ```js

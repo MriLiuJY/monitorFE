@@ -1,5 +1,5 @@
 {
-  "name": "fe-monitor",
+  "name": "fe-monitor-sdk",
   "version": "0.0.1",
   "description": "monitor front-end pro",
   "main": "dist/monitor.0.0.1.js",
