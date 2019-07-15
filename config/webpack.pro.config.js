@@ -5,7 +5,7 @@
  */
 const path = require("path");
 const webpack = require("webpack");
-const metadata = require("../version");
+const metadata = require("../version.json");
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = (env) => {
