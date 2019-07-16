@@ -1,3 +1,9 @@
+/**
+ * @file user account main js in project
+ * @author  JYkid
+ * @version 0.0.1
+ */
+
 const fs = require("fs");
 const express = require("express");
 const webpack = require("webpack");
@@ -6,15 +12,15 @@ const hotMiddleware = require("webpack-hot-middleware");
 const config = require("../config/webpack.dev.config");
 const bodyParser = require("body-parser");
 const session = require('express-session');
-const { connect } = require('./database/init');
+// const { connect } = require('./database/init');
 
 const app = express();
 app.use(express.static("./"));
 const complier = webpack(config);
 
-(async() => {
-  await connect();
-})();
+// (async() => {
+//   await connect();
+// })();
 
 app.all('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
