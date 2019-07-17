@@ -31,8 +31,7 @@ InitMonitor.prototype = {
 
     // 监听全局下的 Promise 错误
     let unhandledrejection = function(err){
-      getError(err, self._config);
-      return true;
+      getJsError(err, self._config);
     }
     window.addEventListener("unhandledrejection", unhandledrejection);
     self._setEvent({

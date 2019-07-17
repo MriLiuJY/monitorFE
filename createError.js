@@ -61,8 +61,8 @@ jsRunningerror.onclick = function () {
 // Promise 错误
 var promiseError = document.getElementsByClassName("promise-error")[0];
 promiseError.onclick = function () {
-  new Promise((resolve, rejects) => {
-    rejects();
+  new Promise((resolve, reject) => {
+    reject();
   })
 }
 
@@ -104,6 +104,8 @@ iframeload.onclick = function () {
 // ------ 第三方资源错误 ------
 var resourceError = document.getElementsByClassName("other-resource-error")[0];
 resourceError.onclick = function () {
+  var test = document.getElementsByClassName("other-resource-error111")[0];
+  test.onclick= function() {};
 }
 
 // ------ 销毁实例 ------

@@ -1,3 +1,9 @@
+/**
+ * @file user account connect DB init js
+ * @author  JYkid
+ * @version 0.0.1
+ */
+
 const mongoose = require("mongoose");
 const db = "mongodb://localhost/test";
 
