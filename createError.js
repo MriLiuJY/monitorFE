@@ -61,8 +61,8 @@ jsRunningerror.onclick = function () {
 // Promise 错误
 var promiseError = document.getElementsByClassName("promise-error")[0];
 promiseError.onclick = function () {
-  new Promise((resolve, rejects) => {
-    rejects();
+  new Promise((resolve, reject) => {
+    reject();
   })
 }
 
