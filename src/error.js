@@ -35,7 +35,7 @@ export const getJsError = function(err, config) {
 
 // 资源加载错误
 export const geetResourceError = function (err, config) {
-  let data = ajax.getWraper(err, Wrap, true);
+  let data = new Wrap()._getErrorMessage(err);
     ajax.post(config.protocol + config.url, data,
     function() {},
     function(error) {

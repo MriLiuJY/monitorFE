@@ -120,7 +120,6 @@ Wrap.prototype = {
       data.detail.line = err.lineno;
       data.detail.filename = err.filename;
       data.detail.type = "error";
-      data.detail.stack = err.error.stack;
     } else if (resource) {
       data.detail.src = err.target.src;
       data.detail.type = "resource";
