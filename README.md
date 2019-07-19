@@ -1,4 +1,4 @@
-# monitorFE
+# MonitorFE
 
 前端埋点监控SDK，一款开箱即用的前端报错监控的埋点SDK。仅需开发埋点接口即可监控收集整个前端项目在运行的时候产生的js内部报错，资源加载异常，接口返回报错，样式丢失的问题。
 
@@ -11,6 +11,8 @@
 2.为更多中小型的项目增加前端的报错监控。
 
 3.作为一款开源产品帮助更多的项目提升稳定性。
+
+![MonitorFE](http://puv83hfjy.bkt.clouddn.com/github/MonitorFE.gif "MonitorFE")
 
 ## 使用
 
