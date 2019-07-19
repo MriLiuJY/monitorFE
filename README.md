@@ -12,7 +12,7 @@
 
 3.作为一款开源产品帮助更多的项目提升稳定性。
 
-![MonitorFE](http://puv83hfjy.bkt.clouddn.com/github/MonitorFE.gif "MonitorFE")
+![MonitorFE](https://github.com/MriLiuJY/monitorFE/blob/master/MonitorFE.gif "MonitorFE")
 
 ## 使用
 
