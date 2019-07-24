@@ -95,11 +95,7 @@ InitMonitor.prototype = {
     
     // ajax timeout
     let ajaxTimeout = function(err) {
-      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
-        return;
-      } else {
-        ajaxError(err, self._config);
-      }
+      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self._config);
     };
     window.addEventListener("ajaxTimeout", ajaxTimeout);
     self._setEvent({
@@ -109,11 +105,7 @@ InitMonitor.prototype = {
 
     // ajax load error
     let ajaxLoad = function(err) {
-      if (err.detail.responseURL.indexOf(self._config.url) > -1) {
-        return;
-      } else {
-        ajaxError(err, self._config);
-      }
+      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self._config);
     }
     window.addEventListener("ajaxLoad", ajaxLoad);
     self._setEvent({

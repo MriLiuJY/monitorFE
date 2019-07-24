@@ -14,7 +14,7 @@ export const getServerError = function() {};
 // ajaxError
 export const ajaxError = function(err, config) {
   // 处理err 上报
-  if (err.type === "ajaxLoad" && err.detail.status > 300) {
+  if (err.type === "ajaxLoad" && err.detail.status >= 400) {
     let data = new Wrap()._getErrorMessage(err);
     ajax.post(config.protocol + config.url, data, function() {},
     function(error) {
