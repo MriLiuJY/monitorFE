@@ -1,4 +1,4 @@
-# FE-Monitor
+# MonitorFE
 
 前端埋点监控SDK，一款开箱即用的前端报错监控的埋点SDK。仅需开发埋点接口即可监控收集整个前端项目在运行的时候产生的js内部报错，资源加载异常，接口返回报错，样式丢失的问题。
 
@@ -11,6 +11,8 @@
 2.为更多中小型的项目增加前端的报错监控。
 
 3.作为一款开源产品帮助更多的项目提升稳定性。
+
+![MonitorFE](https://github.com/MriLiuJY/monitorFE/blob/master/MonitorFE.gif "MonitorFE")
 
 ## 使用
 
@@ -25,6 +27,38 @@
 可以直接 [下载](https://github.com/MriLiuJY/FE-Monitor/releases) SDK 引入自己项目中即可使用。(dist/js)目录下的打包文件。
 
 ### 引入方式
+
+**npm 下载**
+
+```
+npm install fe-monitor-sdk
+```
+
+或者你可以使用淘宝 NPM 镜像安装:
+
+```
+npm install fe-monitor-sdk --registry=https://registry.npm.taobao.org
+```
+
+*使用*
+
+```js
+var initMonitor = require("fe-monitor-sdk");
+
+var config = {}
+  // your config
+};
+initMonitor(config, function(monitor) {
+  // your code...
+  // 销毁实例
+  monitor._destory();
+});
+```
+
+另外，浏览器并不支持 `CommonJS` 规范，因此需要使用 `Browserify` 或者 `Webpack` 等工具进行打包。
+
+
+**js 文件引入**
 
 同源的情况下可以直接引入自己的项目中，注意请使用最新的 SDK 以获取更好的效果。
 
