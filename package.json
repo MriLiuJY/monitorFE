@@ -81,7 +81,7 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
-    "commit-msg": "node ./git-hooks/verify-commit-msg.js"
+    "commit-msg": "node git-hooks/verify-commit-msg.js"
   },
   "lint-staged": {
     "*.js": [
