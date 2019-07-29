@@ -38,7 +38,6 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.17.3",
     "fe-monitor-sdk": "0.0.1",
-    "fundebug-javascript": "^1.9.0",
     "jest": "^24.8.0",
     "lint-staged": "^9.2.1",
     "mongoose": "^5.6.2",
