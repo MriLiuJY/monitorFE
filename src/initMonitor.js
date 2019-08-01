@@ -4,6 +4,7 @@
  * @version 0.0.1-beta
  */
 
+import { record } from "rrweb";
 import Config from "./config";
 import { getJsError, geetResourceError, ajaxError } from "./error";
 import EventCenter from "./eventCenter";
@@ -23,10 +24,11 @@ function InitMonitor(userConfig) {
   
   self._initListenJS();
   self._initListenAjax();
+  self._initRrweb();
 }
 
 InitMonitor.prototype = {
-  _initListenJS: function() {
+  _initListenJS() {
     const self = this;
 
     // 监听全局下的 Promise 错误
@@ -60,7 +62,7 @@ InitMonitor.prototype = {
       func: errorEvent
     });
   },
-  _initListenAjax: function () {
+  _initListenAjax () {
     let self = this;
     function ajaxEventTrigger(event) {
       var ajaxEvent = new CustomEvent(event, { detail: this });
@@ -90,7 +92,7 @@ InitMonitor.prototype = {
      window.XMLHttpRequest = newXHR;
      self._startLintenAjax();
   },
-  _startLintenAjax: function() {
+  _startLintenAjax() {
     const self = this;
     
     // ajax timeout
@@ -113,14 +115,35 @@ InitMonitor.prototype = {
       func: ajaxLoad
     });
   },
-  _getEvent: function() {
+  _getEvent() {
     const self = this;
     return self._eventCenter._get();
+  },
+  _getRrwebEvent() {
+    const self = this;
+    return self._eventCenter._getRecord();
   },
   _setEvent: function(event) {
     const self = this;
     self._eventCenter._set(event);
   },
+  /**
+   * init rrweb
+   */
+  _initRrweb() {
+    const self = this;
+    /**
+     * init record function to record event in browser
+     * @event mouseevent
+     * @param { Object } event
+     */
+    record({
+      emit(event) {
+        console.log(event);
+        self._eventCenter._setRecord(event);
+      }
+    });
+  }
 }
 
 module.exports = InitMonitor;
