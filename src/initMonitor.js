@@ -24,7 +24,9 @@ function InitMonitor(userConfig) {
   
   self._initListenJS();
   self._initListenAjax();
-  self._initRrweb();
+  if (userConfig.record) {
+    self._initRrweb();
+  }
 }
 
 InitMonitor.prototype = {
@@ -139,7 +141,6 @@ InitMonitor.prototype = {
      */
     record({
       emit(event) {
-        console.log(event);
         self._eventCenter._setRecord(event);
       }
     });
