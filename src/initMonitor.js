@@ -141,7 +141,6 @@ InitMonitor.prototype = {
      */
     record({
       emit(event) {
-        console.log(event);
         self._eventCenter._setRecord(event);
       }
     });
