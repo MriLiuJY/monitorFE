@@ -17,7 +17,6 @@
     color: #fff;
   }
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"/>
 </head>
 <body>
   <h1>Monitor testPage</h1>
@@ -79,7 +78,7 @@
       https: false,
       post: false,
       url: "localhost:4000/error",
-      area: document.body
+      record: true,
     };
 
     initMonitor(config, function(monitor) {
@@ -92,13 +91,21 @@
 
   </script>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
   <script>
     /**
      * rrweb 回播
      */
     var rrweb = document.getElementsByClassName("rrweb")[0];
     rrweb.onclick = function () {
-      window.monitor._replay();
+      var events = window.monitor._getRecord();
+      console.log(events);
+
+      new rrwebPlayer({
+        target: document.body,
+        data: { events },
+      });
     }
   </script>
 </body>

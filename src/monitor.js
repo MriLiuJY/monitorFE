@@ -1,6 +1,5 @@
 
 /* eslint-disable */
-import rrwebPlayer from "rrweb-player";
 
 function Monitor(InitMonitor) {
   const self = this;
@@ -21,15 +20,11 @@ Monitor.prototype = {
       }
     }
   },
-  _replay() {
+  _getRecord() {
     const self = this;
-    const events = self._InitMonitor._getRrwebEvent();
-    new rrwebPlayer({
-      // events: events,
-      target: self._InitMonitor._config.area,
-      data: { events },
-    });
-    // rrweb.play();
+    const array = self._InitMonitor._getRrwebEvent();
+    console.log(array);
+    return array
   },
 }
 
