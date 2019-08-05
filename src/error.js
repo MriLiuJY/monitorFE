@@ -1,6 +1,6 @@
 /**
  * @file error event center
- * @author JYkid
+ * @author JYkidrecord
  * @version 0.0.1-beta
  */
 
@@ -8,15 +8,30 @@
 import { ajax } from "./ajax";
 import Wrap from "./wrap";
 
+const wrap = new Wrap();
+const getErrorData = function(err, initMonitor) {
+  let data = wrap._getErrorMessage(err);
+  data.record = [];
+
+  let config = initMonitor._config;
+  if (config.record) {
+    data.record = initMonitor._getRrwebEvent();
+  }
+  return data;
+};
+
 // 服务端返回错误
 export const getServerError = function() {};
 
 // ajaxError
-export const ajaxError = function(err, config) {
+export const ajaxError = function(err, initMonitor) {
   // 处理err 上报
   if (err.type === "ajaxLoad" && err.detail.status >= 400) {
-    let data = new Wrap()._getErrorMessage(err);
-    ajax.post(config.protocol + config.url, data, function() {},
+    let data = getErrorData(err, initMonitor);
+    let config = initMonitor._config;
+    ajax.post(config.protocol + config.url, data, function() {
+      initMonitor._clearEvent();
+    },
     function(error) {
       console.log(error);
     });
@@ -24,21 +39,27 @@ export const ajaxError = function(err, config) {
 }
 
 // js 抛出的错误
-export const getJsError = function(err, config) {
-  let data = new Wrap()._getErrorMessage(err);
+export const getJsError = function(err, initMonitor) {
+  let data = getErrorData(err, initMonitor);
+  let config = initMonitor._config;
   ajax.post(config.protocol + config.url, data,
-  function() {},
+  function() {
+    initMonitor._clearEvent();
+  },
   function(error) {
     console.log(error);
   });
 }
 
 // 资源加载错误
-export const geetResourceError = function (err, config) {
-  let data = new Wrap()._getErrorMessage(err);
-    ajax.post(config.protocol + config.url, data,
-    function() {},
-    function(error) {
-      console.log(error);
-    });
+export const geetResourceError = function (err, initMonitor) {
+  let data = getErrorData(err, initMonitor);
+  let config = initMonitor._config;
+  ajax.post(config.protocol + config.url, data,
+  function() {
+    initMonitor._clearEvent();
+  },
+  function(error) {
+    console.log(error);
+  });
 }
