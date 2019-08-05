@@ -35,6 +35,13 @@ EventCenter.prototype = {
     const self = this;
     self.record.push(event);
   },
+  /**
+   * clear event center data
+   */
+  _clearRecord() {
+    const self = this;
+    self.record.splice(0, self.record.length);
+  },
 };
 
 module.exports = EventCenter;
