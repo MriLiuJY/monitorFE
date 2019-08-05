@@ -23,7 +23,6 @@ Monitor.prototype = {
   _getRecord() {
     const self = this;
     const array = self._InitMonitor._getRrwebEvent();
-    console.log(array);
     return array
   },
 }
