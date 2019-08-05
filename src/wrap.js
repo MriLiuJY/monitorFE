@@ -134,7 +134,7 @@ Wrap.prototype = {
       total++
     }
     return stack;
-}
+  },
 }
 
 module.exports = Wrap;

@@ -35,7 +35,7 @@ InitMonitor.prototype = {
 
     // 监听全局下的 Promise 错误
     let unhandledrejection = function(err){
-      getJsError(err, self._config);
+      getJsError(err, self);
     }
     window.addEventListener("unhandledrejection", unhandledrejection);
     self._setEvent({
@@ -51,11 +51,11 @@ InitMonitor.prototype = {
         if (err.filename.indexOf('monitor') > -1 || process.env.NODE_ENV === 'development') {
           return;
         } else {
-          getJsError(err, self._config);
+          getJsError(err, self);
         }
       } else {
         // 静态资源加载的error事件
-        geetResourceError(err, self._config);
+        geetResourceError(err, self);
       }
     }
     window.addEventListener("error", errorEvent, true);
@@ -99,7 +99,7 @@ InitMonitor.prototype = {
     
     // ajax timeout
     let ajaxTimeout = function(err) {
-      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self._config);
+      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self);
     };
     window.addEventListener("ajaxTimeout", ajaxTimeout);
     self._setEvent({
@@ -109,7 +109,7 @@ InitMonitor.prototype = {
 
     // ajax load error
     let ajaxLoad = function(err) {
-      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self._config);
+      !(err.detail.responseURL.indexOf(self._config.url) > -1) && ajaxError(err, self);
     }
     window.addEventListener("ajaxLoad", ajaxLoad);
     self._setEvent({
@@ -128,6 +128,13 @@ InitMonitor.prototype = {
   _setEvent: function(event) {
     const self = this;
     self._eventCenter._set(event);
+  },
+  /**
+   * clear rrweb event
+   */
+  _clearEvent() {
+    const self = this;
+    self._eventCenter._clearRecord();
   },
   /**
    * init rrweb
