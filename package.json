@@ -8,9 +8,9 @@
     "lint": "eslint --fix",
     "start": "node server/index",
     "dev": "node server/index",
-    "build": "webpack --config config/webpack.pro.config.js && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
-    "dist-js": "webpack --config config/webpack.pro.config.js && node write.js && conventional-changelog -p angular -i ./CHANGELOG.md -s",
-    "dev-js": "webpack --config config/webpack.pro.config.js --env.pro=dev && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
+    "build": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
+    "dist-js": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js && node write.js && conventional-changelog -p angular -i ./CHANGELOG.md -s",
+    "dev-js": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js --env.pro=dev && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "server": "node server/server"
   },
   "repository": {
