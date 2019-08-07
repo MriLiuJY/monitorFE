@@ -1,5 +1,6 @@
 
 /* eslint-disable */
+
 function Monitor(InitMonitor) {
   const self = this;
   self._InitMonitor = InitMonitor;
@@ -7,7 +8,7 @@ function Monitor(InitMonitor) {
 }
 
 Monitor.prototype = {
-  _destory: function() {
+  _destory() {
     const self = this;
     const array = self._InitMonitor._getEvent();
     for (let i = 0; i < array.length; i++) {
@@ -18,6 +19,11 @@ Monitor.prototype = {
         window.removeEventListener(array[i].type, array[i].func);
       }
     }
+  },
+  _getRecord() {
+    const self = this;
+    const array = self._InitMonitor._getRrwebEvent();
+    return array
   },
 }
 

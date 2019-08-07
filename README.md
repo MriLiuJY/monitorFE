@@ -18,11 +18,14 @@
 
 ### 配置项
 
+用于传入 `initMonitor` 的配置项。
+
 |属性|参数|默认值|可选值|说明| 
 |:----- |:-------|:-----|:-----|----- | 
 | method | String | POST | POST，GET | 埋点上报请求方法 |
 | url | String | - | - | 埋点上报url地址 |
 | id | String | - | - | 标识当前用户 |
+| record | Boolean | false | - | 是否录制用户操作用于回放 |
 
 可以直接 [下载](https://github.com/MriLiuJY/FE-Monitor/releases) SDK 引入自己项目中即可使用。(dist/js)目录下的打包文件。
 
@@ -99,6 +102,8 @@ script.addEventListener('load', (e) => {
 });
 </script>
 ```
+
+项目在v0.0.3 版本之后加入 [rrweb](https://github.com/rrweb-io/rrweb) 录制回放功能，可以通过配置传入 `initMonitor` 的 config 中的 `record` 的值来选择是否开启录制，如果传值为 true 的情况下每次错误都会上报收集到的数据用于回放错误复现。
 
 ## 项目架构
 

@@ -63,6 +63,12 @@
   <button class="destory">销毁实例</button>
   <hr>
 
+
+  <!-- rrweb 重播 -->
+  <p>rrweb 重播</p>
+  <button class="rrweb">rrweb 重播</button>
+  <hr>
+
   <!-- 注意这里必须加 crossorigin="anonymous" 否则在引入的时候会因为是第三方资源无法收集完整报错信息 -->
   <script crossorigin="anonymous" src="../dist/js/monitor.js"></script>
   <script src="./createError.js"></script>
@@ -71,10 +77,9 @@
       // name: 'test',
       https: false,
       post: false,
-      url: "localhost:4000/error"
+      url: "localhost:4000/error",
+      record: true,
     };
-
-    // fundebug.test();
 
     initMonitor(config, function(monitor) {
       window.monitor = monitor;
@@ -85,7 +90,23 @@
     }
 
   </script>
-   <!-- <script defer src="https://js.fundebug.cn/fundebug.1.8.2.min.js"
-   apikey="c57c87db91d85b9044db147237fba16d8273678123b2f1ca3d1f96f4d2e5f36f"></script> -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
+  <script>
+    /**
+     * rrweb 回播
+     */
+    var rrweb = document.getElementsByClassName("rrweb")[0];
+    rrweb.onclick = function () {
+      var events = window.monitor._getRecord();
+      console.log(events);
+
+      new rrwebPlayer({
+        target: document.body,
+        data: { events },
+      });
+    }
+  </script>
 </body>
 </html>
