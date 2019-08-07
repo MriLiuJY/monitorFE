@@ -63,21 +63,32 @@
   <button class="destory">销毁实例</button>
   <hr>
 
-  <script src="../version.js"></script>
   <script src="../createError.js"></script>
   <script>
-    var config = {
-      name: 'test',
+    var metadata = {};
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.timeout = 3000;
+    xhr.open("get", '/version.json', true);
+    xhr.setRequestHeader("content-type", "application/json;charset=utf-8");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.send();
+
+    xhr.onload = function () {
+    var result = window.JSON.parse(xhr.responseText);
+      var config = {
+        name: 'test',
+      };
+      
+      var script = document.createElement("script");
+      script.src = `./js/monitor.${result.version}.js`;
+      document.body.appendChild(script);
+      script.addEventListener('load', (e) => {
+        initMonitor(config, function(monitor) {
+        window.monitor = monitor;
+      });
+      });
     };
-    
-    var script = document.createElement("script");
-    script.src = `./js/monitor.${metadata.version}.js`;
-    document.body.appendChild(script);
-    script.addEventListener('load', (e) => {
-      initMonitor(config, function(monitor) {
-      window.monitor = monitor;
-    });
-    });
   </script>
 </body>
 </html>
