@@ -13,6 +13,7 @@ Config.prototype = {
   https: true,
   post: true,
   url: "/monitor",
+  record: false,
   _extend: (self, conf) => {
     Object.keys(conf).map((x) => {
       self[x] = conf[x];
