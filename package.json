@@ -8,18 +8,10 @@
     "lint": "eslint --fix",
     "start": "node server/index",
     "dev": "node server/index",
-<<<<<<< HEAD
-    "build": "webpack --config config/webpack.pro.config.js && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
-    "dist-js": "webpack --config config/webpack.pro.config.js && node write.js && conventional-changelog -p angular -i ./CHANGELOG.md -s",
-    "dev-js": "webpack --config config/webpack.pro.config.js --env.pro=dev && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
-    "server": "node server/server",
-    "precommit": "lint-staged"
-=======
     "build": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "dist-js": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js && node write.js && conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "dev-js": "rm -rf ./dist/js && webpack --config config/webpack.pro.config.js --env.pro=dev && node write.js  && conventional-changelog -p angular -i ./CHANGELOG.md -s",
     "server": "node server/server"
->>>>>>> 5ef96a54a6419e5c91f0004c36e22c6445182e30
   },
   "repository": {
     "type": "git",
