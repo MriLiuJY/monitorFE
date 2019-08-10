@@ -105,6 +105,10 @@ script.addEventListener('load', (e) => {
 
 项目在v0.0.3 版本之后加入 [rrweb](https://github.com/rrweb-io/rrweb) 录制回放功能，可以通过配置传入 `initMonitor` 的 config 中的 `record` 的值来选择是否开启录制，如果传值为 true 的情况下每次错误都会上报收集到的数据用于回放错误复现。
 
+请注意开启 rrweb 会有部分兼容问题请注意:
+
+> 由于使用 `MutationObserver` API，rrweb 不支持 IE11 以下的浏览器。可以从[这里](https://caniuse.com/#feat=mutationobserver)找到兼容的浏览器列表。
+
 ## 项目架构
 
 首先v0.1.0版本设计目的是为了做完整的异常监控，使得前端具备资源加载异常，js运行报错，样式丢失，接口返回异常的捕获能力。
