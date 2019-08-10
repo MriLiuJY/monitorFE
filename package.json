@@ -86,11 +86,9 @@
     "commit-msg": "node git-hooks/verify-commit-msg.js"
   },
   "lint-staged": {
-    "linters": {
-      "static/js/**/*.js": [
-        "./node_modules/.bin/eslint --fix",
-        "git add"
-      ]
-    }
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
