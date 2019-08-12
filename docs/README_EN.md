@@ -29,7 +29,7 @@ A configuration item for passing in `initMonitor`.
 | id | String | - | - | Identifies the current user |
 | record | Boolean | false | - | Whether to record user actions for playback |
 
-You can use the [Download] (https://github.com/MriLiuJY/FE-Monitor/releases) SDK to bring it into your own project. Package files in the (dist/js) directory.
+You can use the [Download](https://github.com/MriLiuJY/FE-Monitor/releases) SDK to bring it into your own project. Package files in the (dist/js) directory.
 
 ### Introduction method
 
@@ -109,7 +109,7 @@ The project adds [rrweb](https://github.com/rrweb-io/rrweb) to the recording pla
 
 Please note that there are some compatibility issues when opening rrweb. Please note:
 
-> Due to the `MutationObserver` API, rrweb does not support browsers below IE11. A list of compatible browsers can be found from [here] (https://caniuse.com/#feat=mutationobserver).
+> Due to the `MutationObserver` API, rrweb does not support browsers below IE11. A list of compatible browsers can be found from [here](https://caniuse.com/#feat=mutationobserver).
 
 ## Project Architecture
 
@@ -140,6 +140,6 @@ Automatically generating a changelog needs to be downloaded locally:
 
 ## License
 
-[MIT] (https://opensource.org/licenses/MIT)
+[MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2019 MriLiuJY
