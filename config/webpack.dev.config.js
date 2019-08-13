@@ -5,7 +5,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode: "development",
-  entry: "./index.js",
+  entry: "./index.ts",
   output: {
     publicPath: "/dist/js/",
     filename: "monitor.js",
@@ -18,21 +18,35 @@ module.exports = {
     host: "localhost",
   },
   module: {
-    rules: [{
-      enforce: "pre",
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "eslint-loader",
-    },
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      use: "babel-loader",
-    },
-    {
-      test:/\.scss$/,
-      use:["style-loader","css-loader"],
-    }
+    rules: [
+      // {
+      //   enforce: "pre",
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   loader: "eslint-loader",
+      // },
+      {
+        test: /\.ts|.tsx$/,
+        exclude: [
+          path.resolve(__dirname, 'node_modules'),
+        ],
+        use: () => {
+          return [
+            {
+              loader: ['ts-loader'],
+            },
+          ];
+        },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: "babel-loader",
+      },
+      {
+        test:/\.scss$/,
+        use:["style-loader","css-loader"],
+      }
     ],
   },
   plugins: [

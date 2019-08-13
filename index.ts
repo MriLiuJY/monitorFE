@@ -4,11 +4,11 @@
  * @version 0.0.1-beta
  */
 
-import Index from "./src/index";
+// import Index from "./src/index";
 
-function Shell(window) {
+function Shell(window: any): void {
   if (!window.initMonitor) {
-    window.initMonitor = Index;
+    // window.initMonitor = Index;
   }
 }
 
